@@ -6,12 +6,12 @@ static float rawToAccel(AccelRange_t accelRange);
 
 HAL_StatusTypeDef MPU6050_GetGyroAccelDMA(MPU6050_t* const mpu6050)
 {
-	return HAL_I2C_Mem_Read_DMA(&hi2c1, mpu6050->dev_address, MPU6050_ACCEL_XOUT_H, I2C_MEMADD_SIZE_8BIT, mpu6050->rawdata_buff, I2C1_RX_DMA_BUFF_SIZ);
+	return HAL_I2C_Mem_Read_DMA(mpu6050->hi2c1, mpu6050->dev_address, MPU6050_ACCEL_XOUT_H, I2C_MEMADD_SIZE_8BIT, mpu6050->rawdata_buff, I2C1_RX_DMA_BUFF_SIZ);
 }
 
 HAL_StatusTypeDef MPU6050_GetGyroAccelBlocking(MPU6050_t* const mpu6050)
 {
-	return HAL_I2C_Mem_Read(&hi2c1, mpu6050->dev_address, MPU6050_ACCEL_XOUT_H, I2C_MEMADD_SIZE_8BIT, mpu6050->rawdata_buff, I2C1_RX_DMA_BUFF_SIZ, 1000);
+	return HAL_I2C_Mem_Read(mpu6050->hi2c1, mpu6050->dev_address, MPU6050_ACCEL_XOUT_H, I2C_MEMADD_SIZE_8BIT, mpu6050->rawdata_buff, I2C1_RX_DMA_BUFF_SIZ, 1000);
 }
 
 void MPU6050_UpdateRawData(MPU6050_t* const mpu6050)
@@ -45,7 +45,7 @@ HAL_StatusTypeDef MPU6050_Write1byte(MPU6050_t* const mpu6050, uint16_t memAddre
 
 HAL_StatusTypeDef MPU6050_Read1byte(MPU6050_t* const mpu6050, uint16_t memAddress, uint8_t* rxBuff)
 {
-	return HAL_I2C_Mem_Read(&hi2c1, mpu6050->dev_address, memAddress, I2C_MEMADD_SIZE_8BIT, rxBuff, 1, 1000);
+	return HAL_I2C_Mem_Read(mpu6050->hi2c1, mpu6050->dev_address, memAddress, I2C_MEMADD_SIZE_8BIT, rxBuff, 1, 1000);
 }
 
 
